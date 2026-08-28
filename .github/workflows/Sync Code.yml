@@ -1,5 +1,5 @@
 #
-# This is free software, lisence use MIT.
+# This is free software, license use MIT.
 # 
 # Copyright (C) 2020 KFERMercer <KFER.Mercer@gmail.com>
 # 
@@ -11,22 +11,17 @@ name: Sync Code from eSir Autobuild Script
 on: 
   repository_dispatch:
   workflow_dispatch:
-  
- push:
-   branches: 
-     - master
+  push:
+    branches: 
+      - master
 
 #  schedule:
 #    - cron: 0 19 * * *
 
 jobs:
-
   merge:
-
     runs-on: ubuntu-latest
-
     steps:
-
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -35,7 +30,7 @@ jobs:
         lfs: true
 
     - name: Syncing Preparation
-      run : |
+      run: |
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
         
@@ -45,12 +40,12 @@ jobs:
     - name: Download All New Changes
       run: |
         if [ -f ./.git/MERGE_MSG ]; then
-        mkdir ./tmp && cp ./.git/MERGE_MSG ./tmp/message
-        sed -i "1c [bot] AutoMerging: merge all upstream's changes:" ./tmp/message
-        sed -i '/^\#.*/d' ./tmp/message
-        git commit --file="./tmp/message"
+          mkdir ./tmp && cp ./.git/MERGE_MSG ./tmp/message
+          sed -i "1c [bot] AutoMerging: merge all upstream's changes:" ./tmp/message
+          sed -i '/^\#.*/d' ./tmp/message
+          git commit --file="./tmp/message"
         else
-        echo "There is no merge commits."
+          echo "There is no merge commits."
         fi
         
     - name: Update My Script
