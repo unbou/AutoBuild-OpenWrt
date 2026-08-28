@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4   # 这里从 v2 升级到了 v4
       with:
         ref: master
         fetch-depth: 0
